@@ -46,6 +46,7 @@ public class FrameKalkulator extends javax.swing.JFrame {
         textFieldKalkulator = new javax.swing.JTextField();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         panelKalkulator = new javax.swing.JPanel();
         acButton = new javax.swing.JButton();
         plusMinusButton = new javax.swing.JButton();
@@ -91,6 +92,13 @@ public class FrameKalkulator extends javax.swing.JFrame {
         );
 
         jTextField1.setText("jTextField1");
+
+        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(364, 537));
@@ -409,7 +417,6 @@ public class FrameKalkulator extends javax.swing.JFrame {
         operand2 = 0;
         operator = "";
         numberText.setText("0");
-        isNewInput = true;  // Reset flag supaya angka baru mengganti angka "0"
     }                                        
 
     private void plusMinusButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -459,8 +466,6 @@ public class FrameKalkulator extends javax.swing.JFrame {
                 numberText.setText(String.valueOf(percentValue));
             }
 
-            isNewInput = true; // Supaya angka berikutnya menggantikan hasil
-
         } catch (NumberFormatException e) {
             numberText.setText("Error");
         }
@@ -471,32 +476,32 @@ public class FrameKalkulator extends javax.swing.JFrame {
         // TODO add your handling code here:
         operand1 = Double.parseDouble(numberText.getText());
         operator = "/";
-        isNewInput = true; // siap untuk mulai mengetik operand2
         numberText.setText(formatNumber(operand1)); // tampilkan operand1 dulu
+        isNewInput = true; // siap untuk mulai mengetik operand2
     }                                            
 
     private void timeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
         operand1 = Double.parseDouble(numberText.getText());
         operator = "*";
-        isNewInput = true; // siap untuk mulai mengetik operand2
         numberText.setText(formatNumber(operand1)); // tampilkan operand1 dulu
+        isNewInput = true; // siap untuk mulai mengetik operand2
     }                                          
 
     private void minButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         operand1 = Double.parseDouble(numberText.getText());
         operator = "-";
-        isNewInput = true; // siap untuk mulai mengetik operand2
         numberText.setText(formatNumber(operand1)); // tampilkan operand1 dulu
+        isNewInput = true; // siap untuk mulai mengetik operand2
     }                                         
 
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
         operand1 = Double.parseDouble(numberText.getText());
         operator = "+";
-        isNewInput = true; // siap untuk mulai mengetik operand2
         numberText.setText(formatNumber(operand1)); // tampilkan operand1 dulu
+        isNewInput = true; // siap untuk mulai mengetik operand2
         
     }                                          
 
@@ -587,7 +592,7 @@ public class FrameKalkulator extends javax.swing.JFrame {
                     if (result == (int) result) {
                         resultText = String.valueOf((int) result);
                     } else {
-                        resultText = String.format("%.2f", result); // tampilkan 2 digit desimal
+                        resultText = String.valueOf(result); 
                     }
                 }
             }
@@ -603,15 +608,15 @@ public class FrameKalkulator extends javax.swing.JFrame {
             operand1 = Double.parseDouble(resultText);
         } catch (NumberFormatException e) {
             operand1 = 0; // reset jika hasilnya bukan angka (misal "Undefined")
-    }
-
-    isNewInput = true; // Siapkan agar input berikutnya menggantikan
+        } 
     }                                           
 
     private void komaButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-        numberText.setText(numberText.getText() + ".");
-        
+        String currentText = numberText.getText();
+        if (!currentText.contains(".")) {
+            numberText.setText(currentText + ".");
+        }
     }                                          
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -738,6 +743,10 @@ public class FrameKalkulator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                   
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
     /**
      * @param args the command line arguments
      */
@@ -784,6 +793,7 @@ public class FrameKalkulator extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton komaButton;
     private javax.swing.JButton minButton;
     private javax.swing.JButton nineButton;
